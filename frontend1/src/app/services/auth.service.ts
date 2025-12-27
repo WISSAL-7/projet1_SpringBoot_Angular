@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 export interface LoginRequest {
   email: string;
@@ -27,6 +27,16 @@ export interface RegisterRequest {
   role: 'PATIENT' | 'DOCTOR';
   cin?: string; // Pour les médecins
   specialty?: string; // Pour les médecins
+}
+export interface RegisterResponse {
+  message: string;
+  userId: number;
+  email: string;
+  token?: string; // Si le backend retourne un token directement
+   role?: string;
+  // Pour les erreurs
+  error?: string;
+  status?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -167,6 +177,51 @@ export class AuthService {
       this.logout();
     }
   }
+  // Ajoutez cette méthode APRES la méthode register() existante
+
+/**
+ * Inscription puis connexion automatique
+ */
+registerAndLogin(userData: RegisterRequest): Observable<any> {
+  return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, userData).pipe(
+    
+    switchMap((registerResponse: RegisterResponse) => {
+      console.log('Inscription réussie:', registerResponse);
+      
+      // Si le backend retourne un token directement
+      if (registerResponse.token) {
+        // Sauvegarder les données d'authentification
+        const authData: LoginResponse = {
+          token: registerResponse.token,
+          refreshToken: '', // Vous pouvez ajuster selon votre backend
+          userId: registerResponse.userId,
+          email: userData.email,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          role: userData.role
+        };
+        
+        this.saveAuthData(authData);
+        this.isAuthenticatedSubject.next(true);
+        this.currentUserSubject.next(authData);
+        
+        return of(authData);
+      } 
+      // Sinon, on fait un login automatique après l'inscription
+      else {
+        console.log('Pas de token reçu, tentative de login automatique...');
+        return this.login({
+          email: userData.email,
+          password: userData.password
+        });
+      }
+    }),
+    catchError(error => {
+      console.error('Erreur lors de registerAndLogin:', error);
+      return throwError(() => error);
+    })
+  );
+}
   
   // Méthode pour simuler une connexion rapide (TEST)
   quickLogin(role: 'PATIENT' | 'DOCTOR' | 'ADMIN') {

@@ -1,0 +1,361 @@
+/* register.component.css */
+.register-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #e0e0e0;
+}
+
+.register-container h2 {
+  text-align: center;
+  color: #3f51b5; /* Angular purple */
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.register-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #3f51b5, #4caf50);
+  border-radius: 2px;
+}
+
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.alert-danger {
+  background-color: #fde8e8;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #a54444;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3f51b5;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+.form-control:hover {
+  border-color: #b0b0b0;
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233f51b5' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  padding-right: 45px;
+  cursor: pointer;
+}
+
+/* Style spécifique pour les sections médecins */
+ng-container {
+  display: block;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 2px dashed #e0e0e0;
+  animation: slideDown 0.3s ease-out;
+}
+
+ng-container .form-group:first-child {
+  margin-top: 0;
+}
+
+/* Bouton de soumission */
+button[type="submit"] {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #388e3c 0%, #43a047 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button[type="submit"]:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Indicateur de chargement */
+button[type="submit"]::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  opacity: 0;
+}
+
+button[type="submit"]:disabled::before {
+  opacity: 1;
+  margin-right: 8px;
+}
+
+.mt-3 {
+  margin-top: 25px;
+  text-align: center;
+  color: #616161;
+  font-size: 15px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.mt-3 a {
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  margin-left: 5px;
+}
+
+.mt-3 a:hover {
+  color: #303f9f;
+  text-decoration: underline;
+}
+
+/* Indicateur visuel pour le rôle sélectionné */
+.form-group:has(#role) {
+  position: relative;
+}
+
+.form-group:has(#role)::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 42px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4caf50;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.form-group:has(#role select:focus)::after {
+  opacity: 1;
+}
+
+/* Style pour les inputs spécifiques */
+#cin {
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+#specialty {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234caf50' viewBox='0 0 16 16'%3E%3Cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3E%3Cpath d='m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z'/%3E%3C/svg%3E");
+}
+
+/* Validation states */
+.form-control.ng-invalid.ng-touched {
+  border-color: #e91e63;
+  background: #fff5f7;
+}
+
+.form-control.ng-valid.ng-touched {
+  border-color: #4caf50;
+  background: #f8fff8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .register-container {
+    margin: 30px 20px;
+    padding: 30px 25px;
+  }
+  
+  .register-container h2 {
+    font-size: 24px;
+  }
+  
+  button[type="submit"] {
+    padding: 14px;
+    font-size: 15px;
+  }
+  
+  .form-control {
+    padding: 12px 14px;
+  }
+}
+
+/* Grille pour les petits écrans */
+@media (min-width: 600px) {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* Variante avec thème Angular Material */
+.register-container.material-theme {
+  background: #f5f5f5;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container.material-theme h2 {
+  color: #673ab7; /* Deep Purple */
+}
+
+.register-container.material-theme h2::after {
+  background: linear-gradient(to right, #673ab7, #4caf50);
+}
+
+.register-container.material-theme button[type="submit"] {
+  background: linear-gradient(135deg, #673ab7 0%, #7e57c2 100%);
+}
+
+.register-container.material-theme button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5e35b1 0%, #6a1b9a 100%);
+}
+
+/* Effet de focus pour les labels */
+.form-group label:has(+ .form-control:focus) {
+  color: #3f51b5;
+  font-weight: 600;
+}
+
+/* Icônes dans les inputs (optionnel) */
+.form-group::before {
+  font-family: 'Font Awesome 6 Free';
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  color: #757575;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.form-group:has(#firstName)::before { content: "👤"; }
+.form-group:has(#lastName)::before { content: "📝"; }
+.form-group:has(#email)::before { content: "📧"; }
+.form-group:has(#password)::before { content: "🔒"; }
+.form-group:has(#phone)::before { content: "📱"; }
+.form-group:has(#role)::before { content: "👥"; }
+.form-group:has(#cin)::before { content: "🆔"; }
+.form-group:has(#specialty)::before { content: "🎓"; }
+
+.form-group:has(input:not(select)) input {
+  padding-left: 45px;
+}
+
+/* Pour éviter que l'icône ne couvre le texte */
+.form-group:has(select)::before {
+  display: none;
+}
+
+/* Style personnalisé pour le sélecteur de rôle */
+#role option {
+  padding: 10px;
+}
+
+#role option[value="PATIENT"] {
+  background: #e8f5e9;
+}
+
+#role option[value="DOCTOR"] {
+  background: #e3f2fd;
+}
