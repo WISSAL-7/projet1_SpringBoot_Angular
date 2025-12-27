@@ -167,4 +167,53 @@ export class AuthService {
       this.logout();
     }
   }
+  
+  // Méthode pour simuler une connexion rapide (TEST)
+  quickLogin(role: 'PATIENT' | 'DOCTOR' | 'ADMIN') {
+    const mockUsers = {
+      PATIENT: {
+        token: 'mock_token_patient_123',
+        user: {
+          id: 1,
+          email: 'patient@test.com',
+          firstName: 'Jean',
+          lastName: 'Dupont',
+          role: 'PATIENT'
+        }
+      },
+      DOCTOR: {
+        token: 'mock_token_doctor_123',
+        user: {
+          id: 2,
+          email: 'docteur@test.com',
+          firstName: 'Dr. Marie',
+          lastName: 'Martin',
+          role: 'DOCTOR'
+        }
+      },
+      ADMIN: {
+        token: 'mock_token_admin_123',
+        user: {
+          id: 3,
+          email: 'admin@test.com',
+          firstName: 'Admin',
+          lastName: 'System',
+          role: 'ADMIN'
+        }
+      }
+    };
+
+    const data = mockUsers[role];
+    localStorage.setItem('auth_token', data.token);
+    localStorage.setItem('user_data', JSON.stringify(data.user));
+    
+    // Recharger la page pour voir les changements
+    window.location.reload();
+  }
+
+  // Méthode pour reset (déconnexion)
+  quickLogout() {
+    localStorage.clear();
+    window.location.reload();
+  }
 }

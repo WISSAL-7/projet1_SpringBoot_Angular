@@ -162,7 +162,7 @@ public class UserService {
         return updateMedecinAttributes(medecin, updates);
     }
     
-    private Medecin updateMedecinAttributes(Medecin medecin, Map<String, Object> updates) {
+    public Medecin updateMedecinAttributes(Medecin medecin, Map<String, Object> updates) {
         if (updates.containsKey("nom")) {
             medecin.setNom((String) updates.get("nom"));
         }
