@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import repository.MedecinRepository;
 import modeles.Medecin;
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping("/api/medcins")
 @CrossOrigin("*")
 public class MedecinController {
 	  @Autowired

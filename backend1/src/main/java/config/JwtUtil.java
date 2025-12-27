@@ -15,10 +15,10 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
     
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret:medical_app_secret_key_1234567890_secure_random_string_for_jwt}")
     private String secret;
     
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:86400000}") // 24h par défaut
     private Long expiration;
     
     private SecretKey getSigningKey() {
